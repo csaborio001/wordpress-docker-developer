@@ -1,0 +1,10 @@
+# Ignore everything.
+/*
+# Execpt these files.
+!.gitignore
+!config
+!mysql
+!xdebug
+!.env
+!docker-compose.yml
+!README.md
