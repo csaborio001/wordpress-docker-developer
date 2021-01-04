@@ -1,6 +1,6 @@
 version: '3.6'
 services:
-  Image below should be used for testing purposes, uses official WordPress docker image
+  # Image below should be used for testing purposes, uses official WordPress docker image
   wordpress:
     image: wordpress:${WORDPRESS_VERSION:-latest}
     container_name: ${COMPOSE_PROJECT_NAME:-wordpress}_wordpress
