@@ -17,6 +17,36 @@ There are two included WordPress configurations, one is meant to be used for loc
 development and has xdebug integration, the other one is based off the WordPress image
 and works perfectlt for acceptance testing.
 
+#### Visual Studio Code Debug Configuration
+
+```
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Listen for XDebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9000,
+            "pathMappings": {
+                "/var/www/html":"${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Launch currently open script",
+            "type": "php",
+            "request": "launch",
+            "program": "${file}",
+            "cwd": "${fileDirname}",
+            "port": 9000
+        }
+    ]
+}
+```
+
 ## To run:
 
 ```docker-composer up```
