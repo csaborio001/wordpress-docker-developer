@@ -1,5 +1,5 @@
 # Ignore everything.
-/*
+/**
 # Execpt these files.
 !.gitignore
 !config

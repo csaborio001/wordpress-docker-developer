@@ -3,16 +3,16 @@ services:
   # Image below should be used for testing purposes, uses official WordPress docker image
   wordpress:
     image: wordpress:${WORDPRESS_VERSION:-latest}
-    container_name: ${COMPOSE_PROJECT_NAME:-wordpress}
+    container_name: ${COMPOSE_PROJECT_NAME:-wordpress}_wordpress
     volumes:
       - ./config/php.conf.ini:/usr/local/etc/php/conf.d/php.ini
-      - ${WORDPRESS_DATA_DIR:-./wordpress}:/var/www/html
+      - .:/var/www/html
     environment:
-      - WORDPRESS_DB_NAME=${COMPOSE_PROJECT_NAME}
-      - WORDPRESS_TABLE_PREFIX=${WORDPRESS_TABLE_PREFIX:}
-      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
-      - WORDPRESS_DB_USER=${DATABASE_USER}
-      - WORDPRESS_DB_PASSWORD=${DATABASE_PASSWORD}
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST:-mysql}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-root}
+      WORDPRESS_DB_PASSWORD: ${DATABASE_PASSWORD:-password}
+      WORDPRESS_DB_NAME: ${COMPOSE_PROJECT_NAME:-wordpress}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
     depends_on:
       - mysql
     restart: always
@@ -25,10 +25,10 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
-      - MYSQL_USER=${DATABASE_USER:-root}
-      - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD:-password}
-      - MYSQL_PASSWORD=${DATABASE_PASSWORD:-password}
-      - MYSQL_DATABASE=${COMPOSE_PROJECT_NAME}
+      MYSQL_USER: ${DATABASE_USER:-root}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD:-password}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD:-password}
+      MYSQL_DATABASE: ${COMPOSE_PROJECT_NAME}
     restart: always
     ports:
         - 1111:3306
