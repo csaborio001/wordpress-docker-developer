@@ -19,7 +19,7 @@ and works perfectlt for acceptance testing.
 
 ## To run:
 
-``docker-composer up
+```docker-composer up```
 
 ** Do not use `docker composer up` as the variables won't bread.
 
