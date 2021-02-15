@@ -5,6 +5,6 @@
 !config
 !mysql
 !xdebug
-!.env
-!docker-compose.yml
+!.env-sample
+!docker-compose-sample.yml
 !README.md
