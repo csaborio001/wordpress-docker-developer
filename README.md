@@ -55,17 +55,21 @@ Before you begin you must comment this line from your docker-compose.yml file:
 
 ```docker-compose down```
 
+4- Start the docker container:
+
+```docker-compose up -d```
+
 4- Run the following command to sync the wp-content directory from your machine to the docker container:
 
 ```
-mutagen sync create --sync-mode=one-way-safe --default-owner-beta=www-data ---default-group-beta=www-data\
+mutagen sync create --sync-mode=one-way-safe --default-owner-beta=www-data --default-group-beta=www-data \
 --name=NAME_OF_MUTAGEN_SYNC \
 PATH_TO_YOUR_WP_CONTENT_FOLDER docker://DOCKER_CONTAINER_NAME/var/www/html/wp-content
 ```
 
 For example:
 
-mutagen sync create --sync-mode=one-way-safe --default-owner-beta=www-data ---default-group-beta=www-data\
+mutagen sync create --sync-mode=one-way-safe --default-owner-beta=www-data --default-group-beta=www-data \
 --name=esaanz-docker-sync \
 ~/WebSites/esaanz.org.au/wp-content docker://esaanz_dev/var/www/html/wp-content
 
