@@ -8,3 +8,4 @@
 !.env-sample
 !docker-compose-sample.yml
 !README.md
+!mutagen.sh
