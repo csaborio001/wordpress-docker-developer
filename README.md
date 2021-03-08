@@ -117,3 +117,11 @@ mutagen sync create --sync-mode=one-way-safe --default-owner-beta=www-data --def
 * https://www.wpdiaries.com/wordpress-with-xdebug-for-docker/#comment-100
 * https://medium.com/@jasonterando/debugging-with-visual-studio-code-xdebug-and-docker-on-windows-b63a10b0dec
 * https://github.com/kassambara/wordpress-docker-compose
+
+## Version History
+
+# 0.0.1
+
+* Created Version History
+* Added mutagen.sh.
+* Added code to install VIM on base image.

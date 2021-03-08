@@ -26,6 +26,8 @@ RUN cd /tmp && \
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
 
+RUN apt-get install -y vim
+
 # Copy xdebug.ini to /usr/local/etc/php/conf.d/
 COPY files-to-copy/ /
 
