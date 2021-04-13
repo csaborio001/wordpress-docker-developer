@@ -22,7 +22,7 @@ RUN cd /tmp && \
     git clone https://github.com/bradt/xdebug-log-filter.git && \
     cd xdebug-log-filter && \
     mv xdebug-log-filter /var/www/html/wp-content
-    rm -rf /tmp/xdebug-log-filter    
+    rm -rf /tmp/xdebug-log-filter
 
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
         sed -i -e "s/^ *memory_limit.*/memory_limit = 4G/g" /usr/local/etc/php/php.ini
