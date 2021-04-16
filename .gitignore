@@ -9,3 +9,5 @@
 !docker-compose-sample.yml
 !README.md
 !mutagen.sh
+!xdebug
+!xdebug/files-to-copy

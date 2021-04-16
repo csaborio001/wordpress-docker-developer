@@ -18,6 +18,12 @@ RUN cd /tmp && \
     make install && \
     rm -rf /tmp/xdebug
 
+RUN cd /tmp && \
+    git clone https://github.com/bradt/xdebug-log-filter.git && \
+    cd xdebug-log-filter && \
+    mv xdebug-log-filter /var/www/html/wp-content && \
+    rm -rf /tmp/xdebug-log-filter
+
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
         sed -i -e "s/^ *memory_limit.*/memory_limit = 4G/g" /usr/local/etc/php/php.ini
 
@@ -27,6 +33,21 @@ RUN cd /tmp && \
     mv wp-cli.phar /usr/local/bin/wp
 
 RUN apt-get install -y vim
+
+RUN apt-get install -y zsh && \
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+        chsh -s /bin/zsh root
+
+# These should be enabled when you have the mutagen config enabled.
+
+# COPY plugins /var/www/html/wp-content/plugins
+# COPY uploads /var/www/html/wp-content/uploads
+
+# RUN chown -R www-data:www-data /var/www/html/wp-content/plugins && \
+# chown -R www-data:www-data /var/www/html/wp-content/uploads
+
 
 # Copy xdebug.ini to /usr/local/etc/php/conf.d/
 COPY files-to-copy/ /
