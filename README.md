@@ -120,6 +120,10 @@ mutagen sync create --sync-mode=one-way-safe --default-owner-beta=www-data --def
 
 ## Version History
 
+# 0.0.4
+
+Added deloy.sh script
+
 # 0.0.1
 
 * Created Version History
