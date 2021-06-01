@@ -120,6 +120,10 @@ mutagen sync create --sync-mode=one-way-safe --default-owner-beta=www-data --def
 
 ## Version History
 
+# 0.0.2
+
+* Added halt.sh and deploy.sh
+
 # 0.0.1
 
 * Created Version History
