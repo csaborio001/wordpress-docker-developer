@@ -1,136 +1,119 @@
-# WordPress Docker Developer
+# 01- Docker Setup
+#scorpio-dev/project-checklist
 
-This configuration is what I use to create WordPress docker contains for development and 
-testing. The container created with the Docker container is a bit slower, so I recommend 
-using the image that uses the official WordPress container for running tests, especially
-acceptance tests.
+Running Mutagen on the Mac can be quite sluggish. After doing some research I decided to use Mutagen to sync things. Ever since the process has been incredibly faster.
 
-## Instructions
+Follow these steps to configure your environment.
 
-1- Clone the repo:
+## Cloning the Repo
 
-```git clone https://github.com/csaborio001/wordpress-docker-developer.git deployment```
+1. From the root of your WordPress install:
 
-2- CD into deployment
-
-3- Open **.env-sample** and change PROJECT_NAME to your project name and remove **-sample** from filename.
-
-4- Open **docker-compose-sample.yml** and change the port numbers (if required) and remove **-sample** from filename.
-
-5- Open a terminal and CD into **deployment**
-
-6- Build the docker image:
-
-```docker-compose build```
-
-7- Start the docker container:
-
-```docker-compose up -d```
-
-8- Wait for a bit as the WordPress install finishes.
-
-9- Visit: ``http://localhost:PORT_YOU_CHOSE``
-
-10- Carry out the WordPress install.
-
-11- You're done!
-
-Optional: Docker on mac is really slow, so I suggest you use Mutagen to keep files between the container and your files synced. Read on to find out how this is done.
-
-### Mutagen
-
-Before you begin you must comment this line from your docker-compose.yml file:
-
-```
-- ../:/var/www/html
+``` bash
+git clone https://github.com/csaborio001/wordpress-docker-developer.git deployment
 ```
 
-1- Download and install [Mutagen](https://mutagen.io)
+This will create a deployment directory with all the files inside. 
 
-2- If you have Brew install, you can just run this command:
+Change directory to deployment:
 
-```brew install mutagen-io/mutagen/mutagen```
+``` bash
+cd deployment
+```
 
-3- Bring down the Docker container:
+3. You can get rid of the git stuff:
 
-```docker-compose down```
+``` bash
+sudo git rm .git
+```
 
-4- Start the docker container:
+## Configure the .env file
+1. Open the ``.env`` file.
+2. In line ``4`` change PROJECT_NAME to your project name (lowercase, underscores - for example: ``kdstudio_dev``)
+3. Save and close  the file.
 
-```docker-compose up -d```
+## Configure the docker-compose.yml file
+1. Open ``docker-compose.yml``
+2. Change the default ports for the web server (line 45) and the mySQL server (line 59)
+3. Save and close the file.
 
-4- Run the following command to sync the wp-content directory from your machine to the docker container:
+## Build and run.
+1. Build and run the docker image:
+```
+docker-compose build
+docker-compose up -d 
+```
+
+This will start the build process, this is what is happening:
+
+* A docker image containing WordPress + Apache + mySQL is being built.
+* All the WP files are being place in the root directory (the one above deployment).
+
+This process can take a while (usually two minutes). Once that is finished you can visit localhost with the port you specified. For instance, if I specified port ``11424`` I would go to:
+
+http://localhost:11424
+
+## Configure the WP install
+1. When you access the web server, you will be prompted to select the language of your WP install, choose the one that best suits.
+2. Follow the wizard and finish installing WordPress
+
+That is basically it if you want to use Mutagen with WordPress carry on…
+
+The idea is that nothing is synced between your machine and the docker container other than what you are currently developing. In this scenario we will assume you are working on a plugin called ``nougato``
+
+## Install
+1. Download and install [Mutagen](https://mutagen.io)
+
+2. If you have Brew install, you can just run this command:
 
 ```
+brew install mutagen-io/mutagen/mutagen
+```
+
+
+## Modify docker-compose.yml file
+
+1. Bring down the Docker container
+
+```
+docker-compose down
+```
+
+2. Open ``docker-compose.yml``
+3. Comment out line 32:
+``` bash
+# - ../:/var/www/html 
+```
+
+4. Save and close the file.
+
+**What does this do?** From now on, the volume is not mapped (this is what slows down your Mac to a crawl). Every time you start that docker container, it will have the default ``wp-content/plugins``` and ```wp-content-uploads``` folders.
+
+5. Start the docker instance:
+
+```
+docker-compose up -d
+```
+
+## Configure Mutagen
+Assuming you want to copy the ``nougato`` plugin to the WordPress install, you would enter the following command to copy that folder over to the docker container:
+
+``` bash
 mutagen sync create --sync-mode=one-way-safe --default-owner-beta=www-data --default-group-beta=www-data \
---name=NAME_OF_MUTAGEN_SYNC \
-PATH_TO_YOUR_WP_CONTENT_FOLDER docker://DOCKER_CONTAINER_NAME/var/www/html/wp-content
+--name=NAME-YOU-WANT-YOUR-MUTAGEN-SYNC-TO-HAVE \
+~/nougato docker://esaanz_dev/var/www/html/wp-content/plugins
 ```
 
-For example:
+* Change NAME-YOU-WANT-YOUR-MUTAGEN-SYNC-TO-HAVE to a name of your choice, no underscores.
+* This example assumes your plugins files are inside ``~/nougato``
 
-mutagen sync create --sync-mode=one-way-safe --default-owner-beta=www-data --default-group-beta=www-data \
---name=esaanz-docker-sync \
-~/WebSites/esaanz.org.au/wp-content docker://esaanz_dev/var/www/html/wp-content
-
-5- Wait a bit mutagen will start the one-way sync to the folder.
-
-### Visual Studio Code Debug Configuration
+You can now type:
 
 ```
-{
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Listen for XDebug",
-            "type": "php",
-            "request": "launch",
-            "port": 9000,
-            "pathMappings": {
-                "/var/www/html":"${workspaceFolder}"
-            }
-        },
-        {
-            "name": "Launch currently open script",
-            "type": "php",
-            "request": "launch",
-            "program": "${file}",
-            "cwd": "${fileDirname}",
-            "port": 9000
-        }
-    ]
-}
+mutagen sync monitor YOUR-MUTAGEN-SYNC-NAME
 ```
 
-## To run:
+To view the changes.
 
-```docker-composer up```
 
-** Do not use `docker composer up` as the variables won't bread.
 
-# Reference
-
-* https://hub.docker.com/_/wordpress/
-* https://www.wpdiaries.com/wordpress-with-xdebug-for-docker/#comment-100
-* https://medium.com/@jasonterando/debugging-with-visual-studio-code-xdebug-and-docker-on-windows-b63a10b0dec
-* https://github.com/kassambara/wordpress-docker-compose
-
-## Version History
-
-# 0.0.5
-
-* Added halt script
-* Changes to Dockerfile to avoid permission issues when copying files
-
-# 0.0.4
-
-Added deloy.sh script
-
-# 0.0.1
-
-* Created Version History
-* Added mutagen.sh.
-* Added code to install VIM on base image.
