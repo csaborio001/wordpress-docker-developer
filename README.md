@@ -101,10 +101,11 @@ Assuming you want to copy the ``nougato`` plugin to the WordPress install, you w
 ``` bash
 mutagen sync create --sync-mode=one-way-safe --default-owner-beta=www-data --default-group-beta=www-data \
 --name=NAME-YOU-WANT-YOUR-MUTAGEN-SYNC-TO-HAVE \
-~/nougato docker://esaanz_dev/var/www/html/wp-content/plugins
+~/nougato docker://YOUR_DOCKER_CONTAINER_NAME/var/www/html/wp-content/plugins
 ```
 
 * Change NAME-YOU-WANT-YOUR-MUTAGEN-SYNC-TO-HAVE to a name of your choice, no underscores.
+* Change YOUR_DOCKER_CONTAINER_NAME to the name of your docker setup.
 * This example assumes your plugins files are inside ``~/nougato``
 
 You can now type:
