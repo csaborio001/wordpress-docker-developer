@@ -1,7 +1,7 @@
 # 01- Docker Setup
 #scorpio-dev/project-checklist
 
-Running Mutagen on the Mac can be quite sluggish. After doing some research I decided to use Mutagen to sync things. Ever since the process has been incredibly faster.
+Running Docker on the Mac can be quite sluggish. After doing some research I decided to use Mutagen to sync things. Ever since the process has been incredibly faster.
 
 Follow these steps to configure your environment.
 
