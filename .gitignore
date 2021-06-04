@@ -5,10 +5,9 @@
 !config
 !mysql
 !xdebug
-!.env-sample
-!docker-compose-sample.yml
+!.env
+!docker-compose.yml
 !README.md
-!mutagen.sh
 !xdebug
 !xdebug/files-to-copy
 !*.sh
