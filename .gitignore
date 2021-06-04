@@ -11,3 +11,4 @@
 !mutagen.sh
 !xdebug
 !xdebug/files-to-copy
+!*.sh
