@@ -1,4 +1,5 @@
-FROM wordpress:5.6.1-php7.4-apache
+FROM wordpress:5.7-php7.4-apache
+
 
 # Install packages under Debian
 RUN apt-get update && \
@@ -40,20 +41,10 @@ RUN apt-get install -y zsh && \
         git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
         chsh -s /bin/zsh root
 
-# These should be enabled when you have the mutagen config enabled.
-
-# COPY plugins /var/www/html/wp-content/plugins
-# COPY uploads /var/www/html/wp-content/uploads
-
-# RUN chown -R www-data:www-data /var/www/html/wp-content/plugins && \
-# chown -R www-data:www-data /var/www/html/wp-content/uploads
-
-
-# Copy xdebug.ini to /usr/local/etc/php/conf.d/
-COPY files-to-copy/ /
+COPY --chown=www-data:www-data files-to-copy/ /
 
 # Since this Dockerfile extends the official Docker image `wordpress`
 # and since `wordpress` in turn extends the offcicial Docker image `php`,
 # the the helper script docker-php-ext-enable (defined for image `php`)
 # works here and we can use it to enable xdebug:
-RUN docker-php-ext-enable xdebug
+# RUN docker-php-ext-enable xdebug
