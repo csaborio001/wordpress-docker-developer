@@ -89,14 +89,13 @@ docker-compose down
 
 **What does this do?** From now on, the volume is not mapped (this is what slows down your Mac to a crawl). Every time you start that docker container, it will have the default ``wp-content/plugins``` and ```wp-content-uploads``` folders.
 
-5. Start the docker instance:
-
-```
-docker-compose up -d
-```
-
 ## Configure Mutagen
-Assuming you want to copy the ``nougato`` plugin to the WordPress install, you would enter the following command to copy that folder over to the docker container:
+1. Start the container again and wait for the WP instance to be ready:
+```
+docker-compose up -d 
+```
+
+2. Let’s assume you want to copy the ``nougato`` plugin to the WordPress install in the Docker image and that such plugin lives in your local wp-content folder. You would enter the following command to copy that folder over to the docker container:
 
 ``` bash
 mutagen sync create --sync-mode=one-way-safe --default-owner-beta=www-data --default-group-beta=www-data \
@@ -115,6 +114,34 @@ mutagen sync monitor YOUR-MUTAGEN-SYNC-NAME
 ```
 
 To view the changes.
+
+## Modify the Dockerfile
+1. Bring down the Docker container
+
+```
+docker-compose down
+```
+
+**What are we doing again?** The idea is that you use the script ``deploy.sh``  to  copy the ``plugins`` and ``uploads`` folders into the docker machine when you build it.
+2. Modify ``deployment/deploy.sh`` replacing ``MUTAGEN_SYNC_NAME``  and ``DOCKER_CONTAINER_NAME`` with the correct values.
+
+## Build the docker image
+From here onwards, every time you would like to run the docker image run the command:
+
+```
+./deploy
+```
+
+This script will:
+
+* Copy everything local in your uploads and plugins folder into the Docker container where they belong.
+* Start the docker container.
+* Resume the mutagen setup.
+* Connect to the machine via the terminal/
+
+
+
+
 
 
 
