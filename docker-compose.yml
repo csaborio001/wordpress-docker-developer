@@ -42,7 +42,7 @@ services:
       - mysql
     restart: always
     ports:
-        - 80:80
+        - 1357:80
 
   mysql:
     image: mysql:${MYSQL_VERSION:-latest}
