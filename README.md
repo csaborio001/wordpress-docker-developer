@@ -155,3 +155,4 @@ This script will:
 * Included new version of mutagen.sh that excludes dist directory
 * Updated docker file to WP 5.8
 * Modified .gitignote to include scripts folder
+* changed .env file to support Apple M1 chips
