@@ -161,3 +161,4 @@ This script will:
 * Compatible with mySQL workaround for M1 chips
 * Mutagen script correctly loads values
 * Deply script working crrectly with env variables
+* Halt script works with variables
