@@ -156,3 +156,4 @@ This script will:
 * Updated docker file to WP 5.8
 * Modified .gitignote to include scripts folder
 * changed .env file to support Apple M1 chips
+* Added environment variables and a way for scripts to load them 
