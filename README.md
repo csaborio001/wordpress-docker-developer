@@ -153,3 +153,4 @@ This script will:
 * Included the scripts folder and a shell script to copy files directly (such as dist folder) to docker container
 * Moved all shell scripts inside the scripts folder
 * Included new version of mutagen.sh that excludes dist directory
+* Updated docker file to WP 5.8
