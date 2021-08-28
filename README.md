@@ -160,3 +160,4 @@ This script will:
 * changed copyDistFolder to hold ,env variables
 * Compatible with mySQL workaround for M1 chips
 * Mutagen script correctly loads values
+* Deply script working crrectly with env variables
