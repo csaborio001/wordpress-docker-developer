@@ -150,10 +150,5 @@ This script will:
 
 ## 0.0.2
 
-
-
-
-
-
-
-* Included the scripts folder and an shell script to copy files directly (such as dist folder) to docjker container
+* Included the scripts folder and a shell script to copy files directly (such as dist folder) to docker container
+* Moved all shell scripts inside the scripts folder
