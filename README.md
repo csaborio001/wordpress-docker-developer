@@ -157,3 +157,4 @@ This script will:
 * Modified .gitignote to include scripts folder
 * changed .env file to support Apple M1 chips
 * Added environment variables and a way for scripts to load them 
+* changed copyDistFolder to hold ,env variables

@@ -1,1 +1,4 @@
-docker cp DIST_SRC_FOLDER docker_container_name://PATH
+# Local .env
+export $(grep -v '^#' .env | xargs)
+
+docker cp $DIST_SRC_FOLDER $COMPOSE_PROJECT_NAME://$DOCKER_MU_PLUGINS_FOLDER
