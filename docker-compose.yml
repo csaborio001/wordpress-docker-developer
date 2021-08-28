@@ -45,7 +45,9 @@ services:
         - 1357:80
 
   mysql:
-    image: mysql/mysql-server:${MYSQL_VERSION:-latest}
+    platform: linux/x86_64
+    image: mysql:${MYSQL_VERSION:-latest}
+#    image: mysql/mysql-server:${MYSQL_VERSION:-latest}
     container_name: ${COMPOSE_PROJECT_NAME}_mysql
     volumes:
       - ./mysql:/var/lib/mysql
