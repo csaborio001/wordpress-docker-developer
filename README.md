@@ -154,3 +154,4 @@ This script will:
 * Moved all shell scripts inside the scripts folder
 * Included new version of mutagen.sh that excludes dist directory
 * Updated docker file to WP 5.8
+* Modified .gitignote to include scripts folder
