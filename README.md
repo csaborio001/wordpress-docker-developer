@@ -1,7 +1,9 @@
 # 01- Docker Setup
 #scorpio-dev/project-checklist
 
-Running Docker on the Mac can be quite sluggish. After doing some research I decided to use Mutagen to sync things. Ever since the process has been incredibly faster.
+Running Docker on the Mac can be quite sluggish. After doing some research I decided to use Mutagen to sync things.
+
+Ever since the process has been incredibly faster.
 
 Follow these steps to configure your environment.
 
@@ -33,6 +35,7 @@ sudo git rm .git
 3. Save and close  the file.
 
 ## Configure the docker-compose.yml file
+
 1. Open ``docker-compose.yml``
 2. Change the default ports for the web server (line 45) and the mySQL server (line 59)
 3. Save and close the file.
@@ -139,9 +142,23 @@ This script will:
 * Resume the mutagen setup.
 * Connect to the machine via the terminal/
 
+# Version History
 
+## 0.0.1 
 
+* Basic version working
 
+## 0.0.2
 
-
-
+* Included the scripts folder and a shell script to copy files directly (such as dist folder) to docker container
+* Moved all shell scripts inside the scripts folder
+* Included new version of mutagen.sh that excludes dist directory
+* Updated docker file to WP 5.8
+* Modified .gitignote to include scripts folder
+* changed .env file to support Apple M1 chips
+* Added environment variables and a way for scripts to load them 
+* changed copyDistFolder to hold ,env variables
+* Compatible with mySQL workaround for M1 chips
+* Mutagen script correctly loads values
+* Deply script working crrectly with env variables
+* Halt script works with variables
