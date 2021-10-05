@@ -8,4 +8,4 @@ docker-compose build
 rm -R xdebug/files-to-copy/var/www/html/wp-content/plugins
 rm -R xdebug/files-to-copy/var/www/html/wp-content/uploads
 
-docker-compose up -d && mutagen sync resume "${MUTAGEN_SYNC_NAME}" && docker exec -it "${COMPOSE_PROJECT_NAME}" /bin/zsh
+docker-compose up -d && docker exec -it "${COMPOSE_PROJECT_NAME}" /bin/zsh
