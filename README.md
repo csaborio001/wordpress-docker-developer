@@ -34,6 +34,5 @@ any of the configuration files.
 
 # 0.0.7
 
-* Fixed the export path inside scripts, included maria db in env, included mailhog.
-
 * Fixed the export path inside scripts, included maria db in env, included mailhog
+* Added Maria DB in mysql config to work with both intel and mi macs
