@@ -32,3 +32,8 @@ any of the configuration files.
 * Got rid of all dead scripts and anything related to mutagen
 * Commented out the xdebug stuff from deployment/xdebug/files-to-copy/usr/local/etc/php/conf.d/xdebug.ini
 
+# 0.0.7
+
+* Fixed the export path inside scripts, included maria db in env, included mailhog.
+
+* Fixed the export path inside scripts, included maria db in env, included mailhog

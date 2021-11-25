@@ -1,5 +1,5 @@
 # Local .env
-export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' ../.env | xargs)
 
 # Copy local resources to this folder.
 rsync -a --exclude '.git' --exclude '**/node_modules/*' ../wp-content/plugins xdebug/files-to-copy/var/www/html/wp-content

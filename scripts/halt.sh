@@ -1,5 +1,5 @@
 # Local .env
-export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' ../.env | xargs)
 
 mutagen sync pause --all
 pgrep gulp | xargs -I{} -n 1 kill {}
