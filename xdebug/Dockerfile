@@ -1,23 +1,12 @@
-FROM wordpress:5.8-php7.4-apache
+FROM wordpress:5.9.3-php7.4-apache
 
 
 # Install packages under Debian
 RUN apt-get update && \
-    apt-get -y install git
-
-# Install XDebug from source as described here:
-# https://xdebug.org/docs/install
-# Available branches of XDebug could be seen here:
-# https://github.com/xdebug/xdebug/branches
-RUN cd /tmp && \
-    git clone git://github.com/xdebug/xdebug.git && \
-    cd xdebug && \
-    git checkout xdebug_2_9 && \
-    phpize && \
-    ./configure --enable-xdebug && \
-    make && \
-    make install && \
-    rm -rf /tmp/xdebug
+    apt-get -y install git && \
+    apt-get install -y libxml2-dev && \
+    apt-get clean -y && \
+    docker-php-ext-install soap
 
 RUN cd /tmp && \
     git clone https://github.com/bradt/xdebug-log-filter.git && \
