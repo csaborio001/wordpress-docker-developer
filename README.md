@@ -36,3 +36,11 @@ any of the configuration files.
 
 * Fixed the export path inside scripts, included maria db in env, included mailhog
 * Added Maria DB in mysql config to work with both intel and mi macs
+
+# 0.0.8
+
+* Added code to mirror wp-config and others
+* Rmoved xdebug from dockerfile
+* Removed WPCLI
+
+* Changes in docker file to include libxml2 and sopa

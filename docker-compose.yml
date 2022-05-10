@@ -16,7 +16,10 @@ services:
       - ./config/php.conf.ini:/usr/local/etc/php/php.ini
       # Docker WordPress files will be placed at the root.
       - ../:/var/www/html
-      #- ../wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:cached
+      # - ../wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:cached
+      # - ../wp-config.php:/var/www/html/wp-config.php
+      # - ../.htaccess:/var/www/html/.htaccess:cached
+      
     environment:
       XDEBUG_CONFIG: "remote_host=host.docker.internal" #This config works for MacOS, otherwise should be ip address of the host machine because docker container cannot find the host by localhost.
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST:-mysql}
@@ -44,18 +47,5 @@ services:
     restart: always
     ports:
         - 3306:3306
-
-  # Command line interface to wordpress
-  # wpcli:
-  #   depends_on: 
-  #     - mysql
-  #     - wordpress
-  #   image: wordpress:cli
-  #   links:
-  #     - mysql:db
-  #   container_name: ${COMPOSE_PROJECT_NAME}_wpcli
-  #   volumes:
-  #     - .:/var/www/html
-  #   working_dir: /var/www/html
 
 
