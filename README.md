@@ -44,3 +44,4 @@ any of the configuration files.
 * Removed WPCLI
 
 * Changes in docker file to include libxml2 and sopa
+* Removed leftover mutagen files
