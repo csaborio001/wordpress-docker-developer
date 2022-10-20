@@ -45,3 +45,4 @@ any of the configuration files.
 
 * Changes in docker file to include libxml2 and sopa
 * Removed leftover mutagen files
+* Added quotes to ports in dockerconifg file

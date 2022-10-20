@@ -4,8 +4,8 @@ services:
     image: mailhog/mailhog:latest
     restart: always
     ports:
-      - 1025:1025
-      - 8025:8025 # Change to unique port
+      - "1025:1025"
+      - "8025:8025" # Change to unique port
   # Image is below for development, sets us XDEBUG.
   wordpress:
     container_name: ${COMPOSE_PROJECT_NAME:-wordpress}
@@ -32,7 +32,7 @@ services:
       - mysql
     restart: always
     ports:
-        - 1357:80
+        - "1357:80"
 
   mysql:
     image: mariadb:${MARIADB_VERSION:-latest}
@@ -46,6 +46,6 @@ services:
       MYSQL_DATABASE: ${COMPOSE_PROJECT_NAME}
     restart: always
     ports:
-        - 3306:3306
+        - "3306:3306"
 
 
