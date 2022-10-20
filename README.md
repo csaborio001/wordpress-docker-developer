@@ -42,5 +42,11 @@ any of the configuration files.
 * Added code to mirror wp-config and others
 * Rmoved xdebug from dockerfile
 * Removed WPCLI
-
 * Changes in docker file to include libxml2 and sopa
+
+# 0.0.9
+
+* Removed leftover mutagen files
+* Added quotes to ports in dockerconifg file
+* Changed WordPress version to 6.0.3
+* Added version # to read me file

@@ -1,4 +1,4 @@
-FROM wordpress:5.9.3-php7.4-apache
+FROM wordpress:6.0.3-php7.4-apache
 
 
 # Install packages under Debian

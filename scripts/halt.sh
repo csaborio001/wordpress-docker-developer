@@ -1,7 +1,6 @@
 # Local .env
 export $(grep -v '^#' ../.env | xargs)
 
-mutagen sync pause --all
 pgrep gulp | xargs -I{} -n 1 kill {}
 docker cp "${COMPOSE_PROJECT_NAME}":/root/.zsh_history xdebug/files-to-copy/root
 rm -R ../wp-content/plugins.bkp
