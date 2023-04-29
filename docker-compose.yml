@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   mailhog:
-    image: mailhog/mailhog:latest
+    image: jcalonso/mailhog:latest
     restart: always
     ports:
       - "1025:1025"
