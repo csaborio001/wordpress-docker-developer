@@ -50,3 +50,8 @@ any of the configuration files.
 * Added quotes to ports in dockerconifg file
 * Changed WordPress version to 6.0.3
 * Added version # to read me file
+
+# 0.0.10
+
+* Changed PHP and WordPress versions
+* Changed mailhog version to include jcalonso version which runs natively on M1 Macs* WP, PHP, Mailhog changes
