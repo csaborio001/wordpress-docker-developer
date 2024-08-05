@@ -55,3 +55,8 @@ any of the configuration files.
 
 * Changed PHP and WordPress versions
 * Changed mailhog version to include jcalonso version which runs natively on M1 Macs* WP, PHP, Mailhog changes
+
+
+# 0.0.11 
+
+* Included myql libraries so that it works with Shipper, WP version changes, changed default website port to 80

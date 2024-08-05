@@ -1,5 +1,4 @@
-FROM wordpress:6.2-php8.1-apache
-
+FROM wordpress:6.6-php8.1-apache
 
 # Install packages under Debian
 RUN apt-get update && \
@@ -7,6 +6,14 @@ RUN apt-get update && \
     apt-get install -y libxml2-dev && \
     apt-get clean -y && \
     docker-php-ext-install soap
+
+RUN apt-get update && apt-get install -y \
+    libmariadb-dev-compat \
+    libmariadb-dev \
+    libzip-dev \
+    zlib1g-dev
+
+RUN docker-php-ext-install pdo_mysql
 
 RUN cd /tmp && \
     git clone https://github.com/bradt/xdebug-log-filter.git && \
