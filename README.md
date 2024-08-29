@@ -60,3 +60,7 @@ any of the configuration files.
 # 0.0.11 
 
 * Included myql libraries so that it works with Shipper, WP version changes, changed default website port to 80
+
+# 0.0.12 
+
+* Got rid of xdebug folder, modiifed DockerFile to be more efficient
