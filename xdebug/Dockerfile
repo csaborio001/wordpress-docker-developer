@@ -7,7 +7,11 @@ RUN apt-get update && apt-get install -y \
     libmariadb-dev-compat \
     libmariadb-dev \
     libzip-dev \
-    zlib1g-dev
+    zlib1g-dev \
+    git \
+    vim \
+    zsh && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install pdo_mysql
 
@@ -25,18 +29,9 @@ RUN cd /tmp && \
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
 
-RUN apt-get install -y vim
-
-RUN apt-get install -y zsh && \
-        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
+RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
         git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
         chsh -s /bin/zsh root
 
 COPY --chown=www-data:www-data files-to-copy/ /
-
-# Since this Dockerfile extends the official Docker image `wordpress`
-# and since `wordpress` in turn extends the offcicial Docker image `php`,
-# the the helper script docker-php-ext-enable (defined for image `php`)
-# works here and we can use it to enable xdebug:
-# RUN docker-php-ext-enable xdebug
