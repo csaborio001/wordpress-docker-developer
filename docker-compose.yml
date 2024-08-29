@@ -4,8 +4,8 @@ services:
     image: jcalonso/mailhog:latest
     restart: always
     ports:
-      - "1025:1025"
-      - "8025:8025" # Change to unique port
+#      - "1025:1025"
+      - "49155:8025"
   # Image is below for development, sets us XDEBUG.
   wordpress:
     container_name: ${COMPOSE_PROJECT_NAME:-wordpress}
@@ -16,10 +16,9 @@ services:
       - ./config/php.conf.ini:/usr/local/etc/php/php.ini
       # Docker WordPress files will be placed at the root.
       - ../:/var/www/html
-      # - ../wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:cached
-      # - ../wp-config.php:/var/www/html/wp-config.php
-      # - ../.htaccess:/var/www/html/.htaccess:cached
-      
+#      - ../wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins
+#      - ../wp-config.php:/var/www/html/wp-config.php
+#      - ../.htaccess:/var/www/html/.htaccess:cached
     environment:
       XDEBUG_CONFIG: "remote_host=host.docker.internal" #This config works for MacOS, otherwise should be ip address of the host machine because docker container cannot find the host by localhost.
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST:-mysql}
@@ -27,6 +26,7 @@ services:
       WORDPRESS_DB_PASSWORD: ${DATABASE_PASSWORD:-password}
       WORDPRESS_DB_NAME: ${COMPOSE_PROJECT_NAME:-wordpress}
       WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+        - WP_CLI_ALLOW_ROOT=true
       # - XDEBUG_CONFIG=remote_host=192.168.1.2
     depends_on:
       - mysql
@@ -46,6 +46,16 @@ services:
       MYSQL_DATABASE: ${COMPOSE_PROJECT_NAME}
     restart: always
     ports:
-        - "3306:3306"
+        - "49157:3306"
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PASSWORD: ${DATABASE_PASSWORD:-password}
+    restart: unless-stopped
+    ports:
+      - "8080:80"
 
 
