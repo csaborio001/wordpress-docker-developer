@@ -1,12 +1,8 @@
-FROM wordpress:6.6-php8.1-apache
+FROM wordpress:6.6.1-php8.1-apache
+
+ENV WP_CLI_ALLOW_ROOT=true
 
 # Install packages under Debian
-RUN apt-get update && \
-    apt-get -y install git && \
-    apt-get install -y libxml2-dev && \
-    apt-get clean -y && \
-    docker-php-ext-install soap
-
 RUN apt-get update && apt-get install -y \
     libmariadb-dev-compat \
     libmariadb-dev \
