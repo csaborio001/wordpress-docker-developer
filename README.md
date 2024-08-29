@@ -64,3 +64,4 @@ any of the configuration files.
 # 0.0.12 
 
 * Got rid of xdebug folder, modiifed DockerFile to be more efficient
+* Forced config folder b/c gitignore can be a bit of..

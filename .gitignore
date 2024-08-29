@@ -1,14 +1,13 @@
 # Ignore everything.
 /**
-# Execpt these files.
+# Except these files.
 !.gitignore
-!config
+!config/
+config/*
 !mysql
-!xdebug
 !.env
 !docker-compose.yml
 !README.md
-!xdebug
-!xdebug/files-to-copy
+!config/files-to-copy
 !*.sh
 !scripts
