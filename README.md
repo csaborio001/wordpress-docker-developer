@@ -71,3 +71,4 @@ any of the configuration files.
 # 0.0.13 
 
 * Simplified version to reduce copying on reply/halt scripts
+* Fixed incorrect ereference to xdebug
