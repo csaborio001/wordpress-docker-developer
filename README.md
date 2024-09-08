@@ -66,3 +66,8 @@ any of the configuration files.
 * Got rid of xdebug folder, modiifed DockerFile to be more efficient
 * Forced config folder b/c gitignore can be a bit of..
 * Newer versions that do not include buggy line
+
+
+# 0.0.13 
+
+* Simplified version to reduce copying on reply/halt scripts

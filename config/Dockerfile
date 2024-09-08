@@ -1,37 +1,57 @@
-FROM wordpress:6.6.1-php8.1-apache
+services:
+  mailhog:
+    image: jcalonso/mailhog:latest
+    restart: always
+    ports:
+      - "1025:1025"
+      - "51203:8025" # Change to unique port
+  wordpress:
+    container_name: ${COMPOSE_PROJECT_NAME:-wordpress}
+    build:
+      dockerfile: Dockerfile # this line is actually redundant here - you need it only if you want to use some custom name for your Dockerfile
+#      context: ./xdebug # a path to a directory containing a Dockerfile, or a url to a git repository
+    volumes:
+      - ./config/php.conf.ini:/usr/local/etc/php/php.ini
+      # Docker WordPress files will be placed at the root.
+#      - ../:/var/www/html
+      - ../wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:cached
+      - ../wp-content/themes/breakdance-zero-theme:/var/www/html/wp-content/themes/breakdance-zero-theme:cached
+      - ../wp-config.php:/var/www/html/wp-config.php
+      - ../.htaccess:/var/www/html/.htaccess:cached
+    environment:
+      XDEBUG_CONFIG: "remote_host=host.docker.internal" #This config works for MacOS, otherwise should be ip address of the host machine because docker container cannot find the host by localhost.
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST:-mysql}
+      WORDPRESS_DB_USER: ${DATABASE_USER:-root}
+      WORDPRESS_DB_PASSWORD: ${DATABASE_PASSWORD:-password}
+      WORDPRESS_DB_NAME: ${COMPOSE_PROJECT_NAME:-wordpress}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+      # - XDEBUG_CONFIG=remote_host=192.168.1.2
+    depends_on:
+      - mysql
+    restart: always
+    ports:
+      - "80:80"
 
-ENV WP_CLI_ALLOW_ROOT=true
+  mysql:
+    image: mariadb:${MARIADB_VERSION:-latest}
+    container_name: ${COMPOSE_PROJECT_NAME}_mysql
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_USER: ${DATABASE_USER:-root}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD:-password}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD:-password}
+      MYSQL_DATABASE: ${COMPOSE_PROJECT_NAME}
+    restart: always
+    ports:
+      - "3306:3306"
 
-# Install packages under Debian
-RUN apt-get update && apt-get install -y \
-    libmariadb-dev-compat \
-    libmariadb-dev \
-    libzip-dev \
-    zlib1g-dev \
-    git \
-    vim \
-    zsh && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
-RUN docker-php-ext-install pdo_mysql
-
-RUN cd /tmp && \
-    git clone https://github.com/bradt/xdebug-log-filter.git && \
-    cd xdebug-log-filter && \
-    mv xdebug-log-filter /var/www/html/wp-content && \
-    rm -rf /tmp/xdebug-log-filter
-
-RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
-        sed -i -e "s/^ *memory_limit.*/memory_limit = 4G/g" /usr/local/etc/php/php.ini
-
-RUN cd /tmp && \
-    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-    chmod +x wp-cli.phar && \
-    mv wp-cli.phar /usr/local/bin/wp
-
-RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
-        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
-        chsh -s /bin/zsh root
-
-COPY --chown=www-data:www-data files-to-copy/ /
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PASSWORD: ${DATABASE_PASSWORD:-password}
+    restart: unless-stopped
+    ports:
+      - "8080:80"
