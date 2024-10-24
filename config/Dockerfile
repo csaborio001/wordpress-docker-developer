@@ -1,4 +1,4 @@
-FROM wordpress:6.6.1-php8.1-apache
+FROM wordpress:6.6.2-php8.1-apache
 
 ENV WP_CLI_ALLOW_ROOT=true
 
@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     git \
     vim \
+    rsync \
     zsh && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -34,4 +35,8 @@ RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/inst
         git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
         chsh -s /bin/zsh root
 
-COPY --chown=www-data:www-data files-to-copy/ /
+COPY --chown=www-data:www-data files-to-copy/var/www/html/wp-content/plugins /var/www/html/wp-content/plugins/
+COPY --chown=www-data:www-data files-to-copy/var/www/html/wp-content/uploads /var/www/html/wp-content/uploads/
+
+# Run the WP-CLI command after the container starts
+#CMD ["wp", "language", "plugin", "install", "--all", "es_ES"]
