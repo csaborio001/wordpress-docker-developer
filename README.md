@@ -66,3 +66,4 @@ any of the configuration files.
 * Got rid of xdebug folder, modiifed DockerFile to be more efficient
 * Forced config folder b/c gitignore can be a bit of..
 * Newer versions that do not include buggy line
+* Moved the WP ALLOW ROOT to end of Dockerfile and updated WP verion to 6.7.1

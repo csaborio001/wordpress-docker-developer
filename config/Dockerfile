@@ -1,6 +1,4 @@
-FROM wordpress:6.6.2-php8.1-apache
-
-ENV WP_CLI_ALLOW_ROOT=true
+FROM wordpress:6.7.1-php8.1-apache
 
 # Install packages under Debian
 RUN apt-get update && apt-get install -y \
@@ -37,6 +35,8 @@ RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/inst
 
 COPY --chown=www-data:www-data files-to-copy/var/www/html/wp-content/plugins /var/www/html/wp-content/plugins/
 COPY --chown=www-data:www-data files-to-copy/var/www/html/wp-content/uploads /var/www/html/wp-content/uploads/
+
+ENV WP_CLI_ALLOW_ROOT=true
 
 # Run the WP-CLI command after the container starts
 #CMD ["wp", "language", "plugin", "install", "--all", "es_ES"]
