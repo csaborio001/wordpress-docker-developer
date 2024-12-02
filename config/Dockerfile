@@ -1,5 +1,7 @@
 FROM wordpress:6.7.1-php8.1-apache
 
+ENV WP_CLI_ALLOW_ROOT=true
+
 # Install packages under Debian
 RUN apt-get update && apt-get install -y \
     libmariadb-dev-compat \
@@ -35,8 +37,9 @@ RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/inst
 
 COPY --chown=www-data:www-data files-to-copy/var/www/html/wp-content/plugins /var/www/html/wp-content/plugins/
 COPY --chown=www-data:www-data files-to-copy/var/www/html/wp-content/uploads /var/www/html/wp-content/uploads/
-
-ENV WP_CLI_ALLOW_ROOT=true
+COPY files-to-copy/root/.zsh_history /root/
+COPY files-to-copy/root/.zshrc /root/
+COPY files-to-copy/var/www/html/wp-content/monitor.config.php /var/www/html/wp-content/
 
 # Run the WP-CLI command after the container starts
 #CMD ["wp", "language", "plugin", "install", "--all", "es_ES"]
