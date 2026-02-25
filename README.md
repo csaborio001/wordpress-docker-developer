@@ -67,3 +67,16 @@ any of the configuration files.
 * Forced config folder b/c gitignore can be a bit of..
 * Newer versions that do not include buggy line
 * Moved the WP ALLOW ROOT to end of Dockerfile and updated WP verion to 6.7.1
+
+
+# 0.0.13 
+
+
+
+# 0.0.15 
+
+
+
+# Wordpress changed to 6.9.1 and PHP to 8.3 in DockerFile 
+
+* changed to 6.9.1 and PHP to 8.3 in DockerFile

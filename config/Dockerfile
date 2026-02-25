@@ -1,4 +1,4 @@
-FROM wordpress:6.7.1-php8.1-apache
+FROM wordpress:6.9.1-php8.3-apache
 
 ENV WP_CLI_ALLOW_ROOT=true
 
