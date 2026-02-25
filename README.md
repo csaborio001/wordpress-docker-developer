@@ -80,3 +80,4 @@ any of the configuration files.
 # Wordpress changed to 6.9.1 and PHP to 8.3 in DockerFile 
 
 * changed to 6.9.1 and PHP to 8.3 in DockerFile
+* Removed two lines that would cause error when image was being built w/o exising WordPress installation 

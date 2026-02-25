@@ -35,8 +35,9 @@ RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/inst
         git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
         chsh -s /bin/zsh root
 
-COPY --chown=www-data:www-data files-to-copy/var/www/html/wp-content/plugins /var/www/html/wp-content/plugins/
-COPY --chown=www-data:www-data files-to-copy/var/www/html/wp-content/uploads /var/www/html/wp-content/uploads/
+# Uncomment these files after first WordPress deployment        
+# COPY --chown=www-data:www-data files-to-copy/var/www/html/wp-content/plugins /var/www/html/wp-content/plugins/
+# COPY --chown=www-data:www-data files-to-copy/var/www/html/wp-content/uploads /var/www/html/wp-content/uploads/
 COPY files-to-copy/root/.zsh_history /root/
 COPY files-to-copy/root/.zshrc /root/
 COPY files-to-copy/var/www/html/wp-content/monitor.config.php /var/www/html/wp-content/
