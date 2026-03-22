@@ -1,4 +1,4 @@
-FROM wordpress:6.7.1-php8.1-apache
+FROM wordpress:6.9.2-php8.3-apache
 
 ENV WP_CLI_ALLOW_ROOT=true
 
@@ -41,5 +41,7 @@ COPY files-to-copy/root/.zsh_history /root/
 COPY files-to-copy/root/.zshrc /root/
 COPY files-to-copy/var/www/html/wp-content/monitor.config.php /var/www/html/wp-content/
 
-# Run the WP-CLI command after the container starts
-#CMD ["wp", "language", "plugin", "install", "--all", "es_ES"]
+RUN mkdir -p /var/www/html/wp-content/php-error-log-viewer
+COPY files-to-copy/var/www/html/wp-content/php-error-log-viewer/. \
+     /var/www/html/wp-content/php-error-log-viewer/
+RUN ls -R /var/www/html/wp-content/
